@@ -1,0 +1,22 @@
+main:
+  build: .
+  volumes:
+    - .:/src
+  volumes_from:
+    - influxdb
+  links:
+    - influxdb
+influxdb:
+  image: tutum/influxdb:latest
+  ports:
+    - 8083:8083
+    - 8086:8086
+  environment:
+    - PRE_CREATE_DB="db1"
+influxdbtags:
+  image: tutum/influxdb:latest
+  ports:
+    - 8084:8083
+    - 8087:8086
+  environment:
+    - PRE_CREATE_DB="db1"
